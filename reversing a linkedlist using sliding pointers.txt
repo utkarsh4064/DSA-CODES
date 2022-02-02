@@ -1,0 +1,14 @@
+sliding pointer concept in linkedlist:
+
+take three pointers p,q and r. where p is initially at first, and q and r are at NULL, immediately following p. then run the loop from similar approach 
+while(p!=NULL) {
+  r=q;
+  q=p;
+  p=p->next;
+  q->next=r;
+     }
+
+first=q;
+
+
+//q plays the main role here by being the middle pointer.

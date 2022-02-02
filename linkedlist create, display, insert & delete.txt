@@ -1,0 +1,147 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+}*first=NULL;
+
+void createlist (int n) {
+    struct Node *temp;
+    struct Node *last;
+    last=(struct Node *)malloc(sizeof(struct Node));
+    first=(struct Node *)malloc(sizeof(struct Node));
+    printf("enter the data\n");
+    scanf("%d",&first->data);
+    first->next=NULL;
+    last=first;
+    for(int i=1 ; i<n ; i++) {
+        temp=(struct Node *)malloc(sizeof(struct Node));
+        printf("enter the data\n");
+        scanf("%d",&temp->data);
+        last->next=temp;
+        last=temp;
+    }
+}
+
+void display() {
+    printf("\n");
+    struct Node *temp;
+    temp=(struct Node *)malloc(sizeof(struct Node));
+    temp=first;
+    while(temp!=NULL) {
+        printf("%d\n",temp->data);
+        temp=temp->next;
+        }
+    printf("\n");
+}
+
+void Rdisplay(struct Node *temp) {
+    if(temp!=NULL)
+    {
+        printf("%d\n",temp->data);
+        Rdisplay(temp->next);
+    }
+}
+
+void insert(int l, int n) {
+    printf("\n");
+    struct Node *temp;
+    struct Node *newnode;
+    temp=(struct Node *)malloc(sizeof(struct Node));
+    newnode=(struct Node *)malloc(sizeof(struct Node));
+    
+    if(l<1 || l>n+1) {
+        printf("wrong choice\n");
+        display();
+        return ;
+    }
+    
+    if(l==1) {
+        temp->data=first->data;
+        temp->next=first->next;
+        printf("enter the data to insert at the beginning\n");
+        scanf("%d",&first->data);
+        first->next=temp;
+        display();
+        return;
+    }
+    
+    if(l==n) {
+        temp=first;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        printf("enter the data to insert at the end\n");
+        scanf("%d",&newnode->data);
+        temp->next=newnode;
+        newnode->next=NULL;
+        display();
+        return;
+    }
+    printf("enter the data to insert at %d's location\n",l);
+    scanf("%d",&newnode->data);
+    temp=first;
+    for(int i=1; i<l ; i++)
+    {
+        temp=temp->next;
+    }
+    newnode->next=temp;
+    temp=first;
+    for(int i=1; i<l-1 ; i++)
+    {
+        temp=temp->next;
+    }
+    temp->next=newnode;
+    display();
+    return;
+}
+
+void delete(int l, int n) {
+    if(l>n || l<1) {
+        printf("wrong choice\n");
+        display();
+        return ;
+    }
+    
+    struct Node *temp;
+    temp=(struct Node *)malloc(sizeof(struct Node));
+    if(l==1) {
+        first=first->next;
+        display();
+        return;
+    }
+    if(l==n) {
+        temp=first;
+        while((temp->next)->next!=NULL) {
+            temp=temp->next;
+        }
+        temp->next=NULL;
+        display();
+        return;
+    }
+    temp=first;
+    for(int i=1; i<l-1; i++) {
+        temp=temp->next;
+    }
+    temp->next=(temp->next)->next;
+    display();
+    return;
+}
+
+int main() {
+    int n; int l;
+    printf("enter the number of nodes\n");
+    scanf("%d",&n);
+    createlist(n);
+    display();
+    printf("enter the location where you want to insert a new element from 1 to %d\n",n+1);
+    scanf("%d",&l);
+    insert(l,n+1);
+    printf("enter the location where you want to delete a node from 1 to %d\n",n+1);
+    scanf("%d",&l);
+    delete(l,n);
+    Rdisplay(first);
+    main();
+}
