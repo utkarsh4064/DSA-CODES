@@ -1,0 +1,128 @@
+#include <iostream>
+
+using namespace std;
+
+struct queue{
+    int front;
+    int rear;
+    int size;
+    int *s;
+}q;
+
+void enqueue(){
+    if(q.rear == q.size-1)
+    {
+        cout<<"queue is full, no more elements can be added\n";
+        return;
+    }
+    int data;
+    cout<<"enter the data to insert\n";
+    cin>>data;
+    if(q.front==-1){
+        q.front=0;
+    }
+    q.rear++;
+    q.s[q.rear]=data;
+}
+
+void dequeue(){
+   if(q.front==-1)
+   {
+      cout<<"queue is empty, please fill some values first\n";
+       return;
+   }
+   cout<<"Element dequeued is: "<<q.s[q.front]<<"\n";
+   q.front++;
+   if(q.front>q.rear){
+       q.front=q.rear=-1;
+   }
+}
+
+void peek() {
+    if(q.front==-1){
+        cout<<"queue is empty\n";
+        return;
+    }
+    int peek; 
+    cout<<"enter the location to peek from 0 to "<<q.size-1<<"\n";
+    cin>>peek;
+    if(peek>=q.front && peek <=q.rear)
+    {
+        cout<<"element at "<<peek<<" location is: "<<q.s[peek]<<"\n";
+    }
+    else{
+        cout<<"Location entered doesn't contain any element, try again\n";
+    }
+}
+
+void emptyFull(){
+    if(q.front==-1)
+    {
+        cout<<"queue is empty\n";
+    }
+    else if(q.rear==q.size-1)
+    cout<<"queue is full\n";
+    else
+    cout<<"neither full nor empty\n";
+}
+
+void isTop()
+{
+    if(q.front==-1){
+        cout<<"queue is empty\n";
+    }
+    else{
+        cout<<"The topmost element is : "<<q.s[q.rear]<<"\n";
+    }
+}
+
+void display() {
+    if(q.front==-1){
+        cout<<"queue is empty\n";
+    }
+    else{
+        cout<<"Elements are:\n";
+        for(int i=q.front; i<=q.rear; i++)
+        {
+            cout<<q.s[i]<<"\n";
+        }
+    }
+}
+
+int main() {
+    cout<<"enter the size of queue\n";
+    cin>>q.size;
+    q.front=q.rear=-1;
+    q.s= new int[q.size];  // q.s = (int *)malloc(q.size*sizeof(int));
+    int opt;
+    while(opt!=7){
+    cout<<"\nenter any option:\n1:enqueue\n2:dequeue\n3:peek\n4:isEmpty or isFull\n5:isTop\n6:display\n7:exit\n\n";
+    cin>>opt;
+    switch(opt){
+        case 1:
+        enqueue();
+        break;
+        case 2:
+        dequeue();
+        break;
+        case 3:
+        peek();
+        break;
+        case 4:
+        emptyFull();
+        break;
+        case 5:
+        isTop();
+        break;
+        case 6:
+        display();
+        break;
+        case 7:
+        cout<<"EXITING THIS MENU, THANK YOU\n";
+        break;
+        default:
+        cout<<"Wrong choice\n";
+        break;
+    }
+  }
+}
