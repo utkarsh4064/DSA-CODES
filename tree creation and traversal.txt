@@ -99,6 +99,49 @@ void postorder(struct Node* p){
     }
 }
 
+void levelorder(){
+    struct Node* p;
+    p=new struct Node;
+    enqueue(root);
+    while(!isEmpty()){
+        p=dequeue();
+        cout<<p->data<<" ";
+        if(p->left)
+        enqueue(p->left);
+        if(p->right)
+        enqueue(p->right);
+    }
+}
+
+int count(struct Node *p){
+    if(p){
+        return count(p->left)+count(p->right)+1;
+    }
+    return 0;
+}
+
+int height(struct Node *p){
+    int x,y=0;
+    if(p){
+        x=height(p->left);
+        y=height(p->right);
+        if(x>y)
+        return x+1;
+        return y+1;
+    }
+    return 0;
+}
+
+int leafnodes(struct Node *p){
+    int x,y=0;
+    if(p){
+        if(!p->left && !p->right)
+        return leafnodes(p->left)+leafnodes(p->right)+1;
+        return leafnodes(p->left)+leafnodes(p->right);
+    }
+    return 0;
+}
+
 int main(){
   q=new struct queue;
   q->size=100;
@@ -107,6 +150,14 @@ int main(){
   q->rear=-1;
   createTree(); 
   preorder(root);
+  cout<<"\n";
   inorder(root);
+  cout<<"\n";
   postorder(root);
+  cout<<"\n";
+  levelorder();
+  cout<<"\n";
+  cout<<"the number of nodes are: "<<count(root)<<"\n";
+  cout<<"the height of the tree is: "<<height(root)<<"\n";
+  cout<<"the number of leaf-nodes are: "<<leafnodes(root)<<"\n";
 }
