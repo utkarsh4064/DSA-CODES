@@ -1,0 +1,42 @@
+// c++ template class code for operating rectangles...
+
+
+#include<iostream>
+
+using namespace std;
+
+template<class T>
+class Rectangle{
+    private:
+    T l;
+    T b;
+    public:
+    Rectangle(T l, T b);
+    T area();
+    T perimeter();
+};
+
+template<class T>
+Rectangle<T>::Rectangle(T l, T b){
+    this->l=l;
+    this->b=b;
+}
+
+template<class T>
+T Rectangle<T>::area(){
+    return l*b;
+}
+
+template<class T>
+T Rectangle<T>::perimeter(){
+    return 2*(l+b);
+}
+
+int main(){
+    Rectangle<int> r(10,20);
+    cout<<r.area()<<endl;
+    cout<<r.perimeter()<<endl;
+    Rectangle<float> r1(13.4,45.6);
+    cout<<r1.area()<<endl;
+    cout<<r1.perimeter()<<endl;
+}
