@@ -1,0 +1,30 @@
+//c++ code for sieve of eratosthenes
+
+#include<iostream>
+
+using namespace std;
+
+void sieve(int ar[], int n){
+    ar[1]=-1;
+    for(int i=2; i*i<=n; i++){
+        if(ar[i]==-1)
+        continue;
+        int temp=ar[i]; int j=2;
+        while((temp*j)<=n){
+            ar[temp*j]=-1;
+            j++;
+        }
+    }
+    for(int i=1; i<n; i++)
+    if(ar[i]!=-1)
+    cout<<ar[i]<<" ";
+}
+
+int main(){
+    int n; cin>>n;
+    int ar[n+1];
+    for(int i=1; i<=n; i++){
+        ar[i]=i;    
+    }
+    sieve(ar,n+1);
+}
