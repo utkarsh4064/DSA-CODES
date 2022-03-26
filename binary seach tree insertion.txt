@@ -1,0 +1,54 @@
+#include <iostream>
+#include <stdlib.h>
+
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node* lchild;
+    struct Node* rchild;
+}*root=NULL;
+
+void insertion(int val){
+    struct Node* p=root;
+    if(!root){
+        root->data=val;
+        root->lchild=root->rchild=NULL;
+    }
+    else{
+        struct Node* temp=(struct Node*)malloc(sizeof(struct Node));
+        temp->data=val;
+        temp->lchild=temp->rchild=NULL;
+        struct Node* p=root;
+        struct Node* q=p;
+        while(p){
+            q=p;
+           if(p->data > temp->data)
+             p=p->lchild;
+             else
+             p=p->rchild;
+        }
+        if(temp->data > q->data)
+        q->rchild=temp;
+        else
+        q->lchild=temp;
+    }
+}
+
+void inorder(struct Node* p){
+    if(p){
+        inorder(p->lchild);
+        cout<<p->data<<endl;
+        inorder(p->rchild);
+    }
+}
+
+int main(){
+    root=(struct Node*)malloc(sizeof(struct Node));
+    insertion(10);
+    insertion(5);
+    insertion(55);
+    insertion(13);
+    insertion(27);
+    inorder(root);
+}
