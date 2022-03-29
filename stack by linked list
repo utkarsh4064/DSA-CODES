@@ -1,0 +1,77 @@
+// STACK implementation using Linked List
+
+#include<iostream>
+
+using namespace std;
+
+struct Node{
+    int data;
+    struct Node* next;
+}*head=NULL;
+
+void push(){
+    int data;
+    cout<<"enter the data\n";
+    cin>>data;
+    if(head==NULL){
+        head=(struct Node*)malloc(sizeof(struct Node));
+        head->data=data;
+        head->next=NULL;
+    }
+    else{
+    struct Node*p=(struct Node*)malloc(sizeof(struct Node));
+    p->data=data;
+    p->next=head;
+    head=p;
+    }
+}
+
+void pop(){
+    if(head){
+    cout<<"value popped is\n"<<head->data<<"\n";
+    head=head->next;}
+    else
+    cout<<"stack empty\n";
+}
+
+void display(){
+    cout<<"elements are:\n";
+    struct Node* p=head;
+    while(p){
+        cout<<p->data<<"\n";
+        p=p->next;
+    }
+}
+
+void isEmpty(){
+    if(head==NULL)
+    cout<<"Empty\n";
+    else
+    cout<<"Not Empty\n";
+}
+
+int main(){
+     int opt; cout<<"1:push\n2:pop\n3:display\n4:isEmpty\n-1:exit\n";
+     cin>>opt;
+     if(opt!=-1){
+     switch(opt){
+         case 1:
+         push();
+         break;
+         case 2:
+         pop();
+         break;
+         case 3:
+         display();
+         break;
+         case 4:
+         isEmpty();
+         break;
+         default:
+         cout<<"wrong choice\n";
+         break;
+     }
+     main();
+     }
+     return 0;
+}
