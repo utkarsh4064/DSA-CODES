@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        int t=1;
+        vector<vector<int>>ans(n,vector<int>(n));
+        int i=0; int lt=0; int rt=n-1;
+        int x=1; int limit=n/2 + n%2;
+        while(x<=limit){
+            int l=lt; int r=rt;
+            for(i=l; i<=r; i++)
+                ans[l][i]=t++;
+            for(i=l+1; i<=r; i++)
+                ans[i][r]=t++;
+            for(i=r-1; i>=l; i--)
+                ans[r][i]=t++;
+            for(i=r-1; i>=l+1 ;i--)
+                ans[i][l]=t++;
+            lt+=1; rt-=1;
+            x++;
+        }
+        return ans;
+    }
+};
