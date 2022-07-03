@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+int BinarySearch(int ar[], int l, int h, int key){
+    if(l<=h){
+    int mid=(l+h)/2;
+    if(ar[mid]==key)
+    return mid;
+    if(ar[mid]<key)
+    BinarySearch(ar,mid+1,h,key);
+    else
+    BinarySearch(ar,l,mid-1,key);
+    }
+    else
+    return -1;
+}
+
+int main()
+{
+    int n=10;
+    int ar[10]={2,3,5,7,11,13,17,19,23,29};
+    int key;
+    cin>>key;
+    cout<<BinarySearch(ar,0,n-1,key)<<endl;
+    main();
+}
