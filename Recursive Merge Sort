@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+void merge(int ar[], int l, int mid, int h){
+    int i=l; int j=mid+1; int c=l;
+    int br[100];
+    while(i<=mid && j<=h){
+        if(ar[i]<=ar[j])
+        br[c++]=ar[i++];
+        else
+        br[c++]=ar[j++];
+    }
+    while(i<=mid){
+        br[c++]=ar[i++];
+    }
+    while(j<=h){
+        br[c++]=ar[j++];
+    }
+    for(int x=l; x<=h; x++)
+    ar[x]=br[x];
+}
+
+void RMerge(int ar[], int l, int h){
+    if(l<h){
+        int mid=(l+h)/2;
+        RMerge(ar,l,mid);
+        RMerge(ar,mid+1,h);
+        merge(ar,l,mid,h);
+    }
+}
+
+int main(){
+    int n=10;
+    int ar[10]={13,6,12,91,34,0,1,3,11,100};
+    RMerge(ar,0,9);
+    for(int i=0; i<n; i++)
+    cout<<ar[i]<<" ";
+}
